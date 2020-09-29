@@ -24,9 +24,9 @@ jobs:
       - run:
           name: Run Cypress tests
           command: |
-          cd ~/tests
-          npm ci
-          ./node_modules/cypress/bin/cypress run
+            cd ~/tests
+            npm ci
+            ./node_modules/cypress/bin/cypress run
       - store_artifacts:
           path: ~/tests/cypress/screenshots
 
