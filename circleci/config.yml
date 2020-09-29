@@ -1,0 +1,31 @@
+version: 2.1
+
+workflows:
+  lint-and-test:
+    jobs:
+
+      - functional-tests
+      - jest
+
+jobs:
+  functional-tests:
+    machine:
+      image: ubuntu-1604:202007-01
+    steps:
+      - checkout
+      - run:
+          name: build docker container
+          command: ./build.sh
+      - run:
+          name: Clone test repository
+          command: >-
+            GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa_fingerprint'
+            git clone git@github.com:danrhjones/circle-website-tests.git ~/tests
+
+      - run:
+          name: Run Cypress tests
+          command: ./node_modules/cypress/bin/cypress run
+      - store_artifacts:
+          path: ~/tests/cypress/screenshots
+
+
