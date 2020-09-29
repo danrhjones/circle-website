@@ -1,11 +1,10 @@
 version: 2.1
 
 workflows:
-  lint-and-test:
+  test:
     jobs:
-
       - functional-tests
-      - jest
+
 
 jobs:
   functional-tests:
